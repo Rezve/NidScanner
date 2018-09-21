@@ -39,7 +39,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         History history = historyList.get(position);
         holder.nameTV.setText(history.getName());
-        holder.dateTV.setText(Utils.dateToString(history.getCreatedAt(), "d MM yyyy"));
+        holder.dateTV.setText(Utils.dateToString(history.getCreatedAt(), "d MMM yyyy"));
         holder.itemView.setTag(history);
     }
 
