@@ -23,6 +23,6 @@ public interface HistoryDao {
     @Delete
     public void delete(History history);
 
-    @Query("SELECT * FROM history")
+    @Query("SELECT * FROM history ORDER BY createdAt DESC")
     public LiveData<List<History>> getAllHistory();
 }

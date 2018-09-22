@@ -53,8 +53,6 @@ public class History implements Parcelable{
         return createdAt;
     }
 
-
-
     @Override
     public int describeContents() {
         return 0;

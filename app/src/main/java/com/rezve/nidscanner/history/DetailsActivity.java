@@ -28,8 +28,10 @@ public class DetailsActivity extends AppCompatActivity {
         TextView name = findViewById(R.id.nameTV);
         TextView details = findViewById(R.id.detailsTV);
         TextView date = findViewById(R.id.dateTV);
+        TextView createdAt = findViewById(R.id.createdAtTV);
         name.setText(history.getName());
         details.setText(history.getDetails());
         date.setText(Utils.dateToString(history.getCreatedAt(), "d MMM yyyy"));
+        createdAt.setText("Scanned at "+ Utils.dateToString(history.getCreatedAt(), "h:ma"));
     }
 }

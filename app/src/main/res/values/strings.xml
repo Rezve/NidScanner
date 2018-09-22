@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">NidScanner</string>
+    <string name="app_name">NID Scanner</string>
+
+    <string name="main_activity_title">NID Scanner</string>
+    <string name="history_activity_title">Scan History</string>
+    <string name="history_details_activity_title">Scan History</string>
 </resources>
