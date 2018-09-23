@@ -17,9 +17,6 @@ public interface HistoryDao {
     @Insert
     public void insert(History history);
 
-    @Update
-    public void update(History history);
-
     @Delete
     public void delete(History history);
 

@@ -3,5 +3,10 @@
 
     <string name="main_activity_title">NID Scanner</string>
     <string name="history_activity_title">Scan History</string>
-    <string name="history_details_activity_title">Scan History</string>
+    <string name="history_details_activity_title">Scan Details</string>
+
+    <string name="nid_no">NID No:</string>
+    <string name="date_of_birth">Date of Birth:</string>
+    <string name="issue_date">Issue Date:</string>
+    <string name="scanned_at">Scanned at:</string>
 </resources>

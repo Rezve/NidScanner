@@ -53,13 +53,19 @@ public class MainActivity extends AppCompatActivity {
         if(result != null) {
             if(result.getContents() != null) {
                 String rawData = result.getContents();
-                String name = Utils.getName(rawData);
-                History history = new History(name, rawData, new Date());
-                viewModel.insert(history);
+                Utils.CARD_TYPE cardType = Utils.getCardType(rawData);
 
-                Intent intent = new Intent(getBaseContext(), HistoryActivity.class);
-                startActivity(intent);
-                Toast.makeText(this, "Scanned: " + Utils.getName(rawData), Toast.LENGTH_LONG).show();
+                if ( cardType != Utils.CARD_TYPE.UNKNOWN ) {
+                    String name = Utils.getName(cardType, rawData);
+                    History history = new History(name, rawData, new Date());
+                    viewModel.insert(history);
+
+                    Intent intent = new Intent(getBaseContext(), HistoryActivity.class);
+                    startActivity(intent);
+                    Toast.makeText(this, "Scanned: " + Utils.getName(cardType, rawData), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, "Invalid NID Card", Toast.LENGTH_LONG).show();
+                }
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);

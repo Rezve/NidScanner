@@ -22,10 +22,12 @@
         </activity>
         <activity
             android:name=".history.HistoryActivity"
-            android:label="@string/history_activity_title" />
+            android:label="@string/history_activity_title"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".history.DetailsActivity"
-            android:label="@string/history_details_activity_title" />
+            android:label="@string/history_details_activity_title"
+            android:parentActivityName=".history.HistoryActivity"/>
     </application>
 
 </manifest>

@@ -18,6 +18,7 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
         History history = intent.getParcelableExtra("history");
@@ -25,13 +26,9 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void initUi(History history) {
-        TextView name = findViewById(R.id.nameTV);
         TextView details = findViewById(R.id.detailsTV);
-        TextView date = findViewById(R.id.dateTV);
         TextView createdAt = findViewById(R.id.createdAtTV);
-        name.setText(history.getName());
         details.setText(history.getDetails());
-        date.setText(Utils.dateToString(history.getCreatedAt(), "d MMM yyyy"));
-        createdAt.setText("Scanned at "+ Utils.dateToString(history.getCreatedAt(), "h:ma"));
+        createdAt.setText("Scanned at "+ Utils.dateToString(history.getCreatedAt(), "MMM d, yyyy h:ma"));
     }
 }

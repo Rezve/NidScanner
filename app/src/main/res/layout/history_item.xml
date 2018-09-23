@@ -18,24 +18,45 @@
         android:id="@+id/historyItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:transitionName="test1">
+        android:transitionName="test1"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/nameTV"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Mr. xyz"
+            android:text="Md. Rezve Hasan"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/dateTV"
-            android:layout_width="wrap_content"
+            android:id="@+id/nidNoTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="NID No: 1552412640" />
+
+        <TextView
+            android:id="@+id/dobTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Date of Birth: 1995 Oct 25" />
+
+        <TextView
+            android:id="@+id/issueDateTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Issue Date: 2016 Jun 29" />
+
+        <TextView
+            android:id="@+id/scannedDateTV"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:gravity="right"
-            android:text="1 Jan 2019"
-            android:textSize="18sp" />
+            android:text="Scanned at: 1 Jan 2019"
+            android:textSize="12sp" />
 
     </LinearLayout>
 </android.support.v7.widget.CardView>
