@@ -12,49 +12,6 @@ public class Utils {
 
     public enum CARD_TYPE { SMART_NID_CARD, OLD_NID_CARD, UNKNOWN }
 
-    public static String getName(CARD_TYPE cardType, String rawData) {
-        if ( cardType == CARD_TYPE.SMART_NID_CARD ) {
-            return rawData.substring(rawData.indexOf("NM") + SMART_STRING_PADDING, rawData.indexOf("NW"));
-        } else if ( cardType == CARD_TYPE.OLD_NID_CARD ) {
-            return rawData.substring(rawData.indexOf("<name>") + OLD_NAME_PADDING, rawData.indexOf("</name>"));
-        } else {
-            return null;
-        }
-    }
-
-    public static String getNidNo(CARD_TYPE cardType, String rawData) {
-        if ( cardType == CARD_TYPE.SMART_NID_CARD ) {
-            return rawData.substring(rawData.indexOf("NW") + SMART_STRING_PADDING, rawData.indexOf("OL"));
-        } else if ( cardType == CARD_TYPE.OLD_NID_CARD ) {
-            return rawData.substring(rawData.indexOf("<pin>") + OLD_NID_NO_PADDING, rawData.indexOf("</pin>"));
-        } else {
-            return null;
-        }
-    }
-
-    public static String getDateOfBirth(CARD_TYPE cardType, String rawData) {
-        if ( cardType == CARD_TYPE.SMART_NID_CARD ) {
-            String date = rawData.substring(rawData.indexOf("BR") + SMART_STRING_PADDING, rawData.indexOf("PE"));
-            return formatDate(date, "yyyyMMdd");
-        } else if ( cardType == CARD_TYPE.OLD_NID_CARD ) {
-            String date = rawData.substring(rawData.indexOf("<DOB>") + OLD_DOB_PADDING, rawData.indexOf("</DOB>"));
-            return formatDate(date, "dd MMM yyyy");
-        } else {
-            return null;
-        }
-    }
-
-    public static String getIssueDate(CARD_TYPE cardType, String rawData) {
-        if ( cardType == CARD_TYPE.SMART_NID_CARD ) {
-            String date = rawData.substring(rawData.indexOf("DT") + SMART_STRING_PADDING, rawData.indexOf("PK"));
-            return formatDate(date, "yyyyMMdd");
-        } else if ( cardType == CARD_TYPE.OLD_NID_CARD ) {
-            return "N/A";
-        } else {
-            return null;
-        }
-    }
-
     public static CARD_TYPE getCardType(String rawData) {
         if (isSmartCard(rawData)) {
             return CARD_TYPE.SMART_NID_CARD;

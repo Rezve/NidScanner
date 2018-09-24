@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(getBaseContext(), HistoryActivity.class);
                     startActivity(intent);
-                    Toast.makeText(this, "Scanned: " + Utils.getName(cardType, rawData), Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Scanning successful", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(this, "Invalid NID Card", Toast.LENGTH_LONG).show();
                 }
