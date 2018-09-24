@@ -21,11 +21,16 @@ public class DetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
-        History history = intent.getParcelableExtra("history");
-        initUi(history);
+        if (intent != null) {
+            History history = intent.getParcelableExtra("history");
+            initUi(history);
+        }
     }
 
     private void initUi(History history) {
+        if (history == null) {
+            return;
+        }
         TextView details = findViewById(R.id.detailsTV);
         TextView createdAt = findViewById(R.id.createdAtTV);
         details.setText(history.getDetails());

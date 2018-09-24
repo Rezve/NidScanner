@@ -8,6 +8,7 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 import com.rezve.nidscanner.models.History;
+import com.rezve.nidscanner.models.Nid;
 
 import java.util.List;
 
@@ -15,11 +16,11 @@ import java.util.List;
 public interface HistoryDao {
 
     @Insert
-    public void insert(History history);
+    public void insert(Nid nid);
 
     @Delete
-    public void delete(History history);
+    public void delete(Nid nid);
 
-    @Query("SELECT * FROM history ORDER BY createdAt DESC")
-    public LiveData<List<History>> getAllHistory();
+    @Query("SELECT * FROM nid ORDER BY createdAt DESC")
+    public LiveData<List<Nid>> getAllHistory();
 }

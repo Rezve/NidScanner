@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.rezve.nidscanner.R;
 import com.rezve.nidscanner.models.History;
+import com.rezve.nidscanner.models.Nid;
 
 import java.util.Date;
 import java.util.List;
@@ -34,9 +35,9 @@ public class HistoryActivity extends AppCompatActivity {
     private void setRecyclerView() {
         adapter = new HistoryAdapter(onClickListener, onLongClickListener);
         viewModel = ViewModelProviders.of(this).get(HistoryViewModel.class);
-        viewModel.getHistoryList().observe(this, new Observer<List<History>>() {
+        viewModel.getHistoryList().observe(this, new Observer<List<Nid>>() {
             @Override
-            public void onChanged(@Nullable List<History> histories) {
+            public void onChanged(@Nullable List<Nid> histories) {
                 adapter.setHistoryList(histories);
             }
         });
@@ -48,7 +49,8 @@ public class HistoryActivity extends AppCompatActivity {
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            History history = (History) v.getTag();
+            Nid nid = (Nid) v.getTag();
+            History history = new History(nid.getRawData(), nid.getCreatedAt());
             Intent intent = new Intent(getBaseContext(), DetailsActivity.class);
             intent.putExtra("history", history);
             startActivity(intent);
@@ -58,13 +60,13 @@ public class HistoryActivity extends AppCompatActivity {
     View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
-            final History history = (History) v.getTag();
-            String msg = "Want to delete ?";
-            Snackbar.make(v, msg , Snackbar.LENGTH_LONG).setAction("Delete", new View.OnClickListener() {
+            final Nid nid = (Nid) v.getTag();
+            String msg = "Do you really want to delete ?";
+            Snackbar.make(v, msg , Snackbar.LENGTH_LONG).setAction("Yes", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            viewModel.delete(history);
-                            Snackbar.make(v, "Name Deleted", Snackbar.LENGTH_SHORT).show();
+                            viewModel.delete(nid);
+                            Snackbar.make(v, "Deleted successfully", Snackbar.LENGTH_SHORT).show();
                         }
                     }).show();
             return true;

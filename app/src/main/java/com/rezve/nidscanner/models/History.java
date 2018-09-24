@@ -11,12 +11,9 @@ import com.rezve.nidscanner.db.DateConverter;
 
 import java.util.Date;
 
-@Entity
 public class History implements Parcelable{
-    @PrimaryKey(autoGenerate = true)
     private int id;
     private String details;
-    @TypeConverters( DateConverter.class )
     private Date createdAt;
 
     public History(String details, Date createdAt) {

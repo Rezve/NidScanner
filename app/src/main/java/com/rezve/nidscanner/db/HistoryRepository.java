@@ -5,6 +5,7 @@ import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
 import com.rezve.nidscanner.models.History;
+import com.rezve.nidscanner.models.Nid;
 
 import java.util.List;
 
@@ -12,26 +13,26 @@ public class HistoryRepository {
     private enum TASK { INSERT, DELETE };
 
     private HistoryDao historyDao;
-    private LiveData<List<History>> historyList;
+    private LiveData<List<Nid>> historyList;
 
     public HistoryRepository(Application application) {
         historyDao = ScannerDb.getDatabase(application).historyDao();
         historyList = historyDao.getAllHistory();
     }
 
-    public void insert(History history) {
-        new DbTask(historyDao, TASK.INSERT).execute(history);
+    public void insert(Nid nid) {
+        new DbTask(historyDao, TASK.INSERT).execute(nid);
     }
 
-    public void delete(History history) {
-        new DbTask(historyDao, TASK.DELETE).execute(history);
+    public void delete(Nid nid) {
+        new DbTask(historyDao, TASK.DELETE).execute(nid);
     }
 
-    public LiveData<List<History>> getHistoryList() {
+    public LiveData<List<Nid>> getHistoryList() {
         return historyList;
     }
 
-    private static class DbTask extends AsyncTask<History, Void, Void> {
+    private static class DbTask extends AsyncTask<Nid, Void, Void> {
         HistoryDao historyDao;
         private TASK task;
 
@@ -41,7 +42,7 @@ public class HistoryRepository {
         }
 
         @Override
-        protected Void doInBackground(History... histories) {
+        protected Void doInBackground(Nid... histories) {
             if (task == TASK.INSERT) {
                 historyDao.insert(histories[0]);
             } else if (task == TASK.DELETE) {

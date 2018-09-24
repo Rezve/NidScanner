@@ -7,12 +7,13 @@ import android.support.annotation.NonNull;
 
 import com.rezve.nidscanner.db.HistoryRepository;
 import com.rezve.nidscanner.models.History;
+import com.rezve.nidscanner.models.Nid;
 
 import java.util.List;
 
 public class HistoryViewModel extends AndroidViewModel {
     private HistoryRepository repository;
-    private LiveData<List<History>> historyList;
+    private LiveData<List<Nid>> historyList;
 
     public HistoryViewModel(@NonNull Application application) {
         super(application);
@@ -20,15 +21,15 @@ public class HistoryViewModel extends AndroidViewModel {
         historyList = repository.getHistoryList();
     }
 
-    public void insert(History history) {
-        repository.insert(history);
+    public void insert(Nid nid) {
+        repository.insert(nid);
     }
 
-    public void delete(History history) {
-        repository.delete(history);
+    public void delete(Nid nid) {
+        repository.delete(nid);
     }
 
-    public LiveData<List<History>> getHistoryList() {
+    public LiveData<List<Nid>> getHistoryList() {
         return historyList;
     }
 }

@@ -14,6 +14,10 @@ import com.google.zxing.integration.android.IntentResult;
 import com.rezve.nidscanner.history.HistoryActivity;
 import com.rezve.nidscanner.history.HistoryViewModel;
 import com.rezve.nidscanner.models.History;
+import com.rezve.nidscanner.models.Nid;
+import com.rezve.nidscanner.parser.DataParser;
+import com.rezve.nidscanner.parser.NewNidDataParser;
+import com.rezve.nidscanner.parser.OldNidDataParser;
 
 import java.util.Date;
 
@@ -55,13 +59,14 @@ public class MainActivity extends AppCompatActivity {
                 String rawData = result.getContents();
                 Utils.CARD_TYPE cardType = Utils.getCardType(rawData);
 
-                if ( cardType != Utils.CARD_TYPE.UNKNOWN ) {
-                    History history = new History(rawData, new Date());
-                    viewModel.insert(history);
-
-                    Intent intent = new Intent(getBaseContext(), HistoryActivity.class);
-                    startActivity(intent);
-                    Toast.makeText(this, "Scanning successful", Toast.LENGTH_LONG).show();
+                if ( cardType == Utils.CARD_TYPE.SMART_NID_CARD ) {
+                    NewNidDataParser parser = new NewNidDataParser(this, rawData);
+                    saveCardData(parser);
+                    showListActivity();
+                } else if (cardType == Utils.CARD_TYPE.OLD_NID_CARD) {
+                    OldNidDataParser parser = new OldNidDataParser(this, rawData);
+                    saveCardData(parser);
+                    showListActivity();
                 } else {
                     Toast.makeText(this, "Invalid NID Card", Toast.LENGTH_LONG).show();
                 }
@@ -69,6 +74,23 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private void saveCardData(DataParser parser) {
+        String name = parser.getName();
+        String nidNo = parser.getNidNo();
+        String dateOfBirth = parser.getDateOfBirth();
+        String issueDate = parser.getIssueDate();
+        String rawData = parser.getRawData();
+
+        Nid nid = new Nid(name, nidNo, dateOfBirth, issueDate, rawData, new Date());
+        viewModel.insert(nid);
+    }
+
+    private void showListActivity() {
+        Intent intent = new Intent(this, HistoryActivity.class);
+        startActivity(intent);
+        Toast.makeText(this, "Scanning successful", Toast.LENGTH_LONG).show();
     }
 
     public void viewHistory(View view) {

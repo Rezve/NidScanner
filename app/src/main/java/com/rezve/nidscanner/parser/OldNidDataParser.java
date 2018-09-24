@@ -5,9 +5,10 @@ import android.content.Context;
 import com.rezve.nidscanner.R;
 import com.rezve.nidscanner.Utils;
 import com.rezve.nidscanner.parser.DataParser;
-
+/**
+ * Old NID card data parser
+ */
 public class OldNidDataParser extends DataParser {
-    private static final int SMART_STRING_PADDING = 2;
     private static final int OLD_NAME_PADDING = 6;
     private static final int OLD_NID_NO_PADDING = 5;
     private static final int OLD_DOB_PADDING = 5;
@@ -17,6 +18,9 @@ public class OldNidDataParser extends DataParser {
         parse();
     }
 
+    /**
+     * Parse all info
+     */
     private void parse() {
         setName();
         setNidNo();

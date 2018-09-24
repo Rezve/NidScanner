@@ -6,6 +6,9 @@ import com.rezve.nidscanner.R;
 import com.rezve.nidscanner.Utils;
 import com.rezve.nidscanner.parser.DataParser;
 
+/**
+ * Smart card data parser
+ */
 public class NewNidDataParser extends DataParser {
     private static final int SMART_STRING_PADDING = 2;
 
@@ -15,6 +18,9 @@ public class NewNidDataParser extends DataParser {
         parse();
     }
 
+    /**
+     * Parse all info
+     */
     private void parse() {
         setName();
         setNidNo();

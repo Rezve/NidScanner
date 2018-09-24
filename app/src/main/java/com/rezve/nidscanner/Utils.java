@@ -5,11 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Utils {
-    private static final int SMART_STRING_PADDING = 2;
-    private static final int OLD_NAME_PADDING = 6;
-    private static final int OLD_NID_NO_PADDING = 5;
-    private static final int OLD_DOB_PADDING = 5;
-
     public enum CARD_TYPE { SMART_NID_CARD, OLD_NID_CARD, UNKNOWN }
 
     public static CARD_TYPE getCardType(String rawData) {

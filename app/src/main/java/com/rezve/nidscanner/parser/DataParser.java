@@ -2,7 +2,10 @@ package com.rezve.nidscanner.parser;
 
 import android.content.Context;
 
-public class DataParser {
+/**
+ * NID Data parser base class
+ */
+public abstract class DataParser {
     private Context context;
     protected String name;
     protected String nidNo;
@@ -13,6 +16,10 @@ public class DataParser {
     public DataParser(Context context, String rawData) {
         this.context = context;
         this.rawData = rawData;
+    }
+
+    public String getRawData() {
+        return rawData;
     }
 
     public String getName() {

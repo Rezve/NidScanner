@@ -6,8 +6,9 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
 import com.rezve.nidscanner.models.History;
+import com.rezve.nidscanner.models.Nid;
 
-@Database(entities = {History.class}, version = 1)
+@Database(entities = {Nid.class}, version = 1)
 public abstract class ScannerDb extends RoomDatabase {
     public abstract HistoryDao historyDao();
     private static ScannerDb INSTANCE;
