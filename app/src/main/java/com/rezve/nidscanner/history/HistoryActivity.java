@@ -59,7 +59,7 @@ public class HistoryActivity extends AppCompatActivity {
         @Override
         public boolean onLongClick(View v) {
             final History history = (History) v.getTag();
-            String msg = "Want to delete "+history.getName() +"  ?";
+            String msg = "Want to delete ?";
             Snackbar.make(v, msg , Snackbar.LENGTH_LONG).setAction("Delete", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -70,10 +70,4 @@ public class HistoryActivity extends AppCompatActivity {
             return true;
         }
     };
-
-    public void insert(View view) {
-        History history = new History("Name", "detailsss", new Date());
-        viewModel.insert(history);
-    }
-
 }

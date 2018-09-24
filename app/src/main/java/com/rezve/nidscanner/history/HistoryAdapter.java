@@ -10,7 +10,11 @@ import android.widget.TextView;
 import com.rezve.nidscanner.R;
 import com.rezve.nidscanner.Utils;
 import com.rezve.nidscanner.models.History;
+import com.rezve.nidscanner.parser.DataParser;
+import com.rezve.nidscanner.parser.NewNidDataParser;
+import com.rezve.nidscanner.parser.OldNidDataParser;
 
+import java.util.Date;
 import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
@@ -39,17 +43,31 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         History history = historyList.get(position);
         String rawData = history.getDetails();
-        String scannedAt = Utils.dateToString(history.getCreatedAt(), "dd MMMM yyyy");
         Utils.CARD_TYPE cardType = Utils.getCardType(rawData);
 
-        if (cardType != Utils.CARD_TYPE.UNKNOWN) {
-            holder.nameTV.setText(Utils.getName(cardType, rawData));
-            holder.nidNoTV.setText(holder.getString(R.string.nid_no) + Utils.getNidNo(cardType, rawData));
-            holder.dobTV.setText(holder.getString(R.string.date_of_birth) + Utils.getDateOfBirth(cardType, rawData));
-            holder.issueDateTV.setText(holder.getString(R.string.issue_date) + Utils.getIssueDate(cardType, rawData));
-            holder.scannedDateTV.setText(holder.getString(R.string.scanned_at) +scannedAt);
+        if (cardType == Utils.CARD_TYPE.SMART_NID_CARD) {
+            NewNidDataParser parser = new NewNidDataParser(holder.itemView.getContext(), rawData);
+            setCardData(holder, history, parser);
+            holder.itemView.setTag(history);
+        } else if (cardType == Utils.CARD_TYPE.OLD_NID_CARD) {
+            OldNidDataParser parser = new OldNidDataParser(holder.itemView.getContext(), rawData);
+            setCardData(holder, history, parser);
             holder.itemView.setTag(history);
         }
+    }
+
+    private void setCardData(ViewHolder holder, History history, DataParser parser) {
+        String scannedAt = getScannedTime(holder, history.getCreatedAt());
+        holder.nameTV.setText(parser.getName());
+        holder.nidNoTV.setText(parser.getName());
+        holder.dobTV.setText(parser.getDateOfBirth());
+        holder.issueDateTV.setText(parser.getIssueDate());
+        holder.scannedDateTV.setText(scannedAt);
+    }
+
+    private String getScannedTime(ViewHolder holder, Date date) {
+        String dateStr = Utils.dateToString(date, "MMM d, yyyy h:ma");
+        return holder.itemView.getResources().getString(R.string.scanned_at) + " " + dateStr;
     }
 
     @Override

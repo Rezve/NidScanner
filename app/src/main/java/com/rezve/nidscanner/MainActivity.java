@@ -56,8 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 Utils.CARD_TYPE cardType = Utils.getCardType(rawData);
 
                 if ( cardType != Utils.CARD_TYPE.UNKNOWN ) {
-                    String name = Utils.getName(cardType, rawData);
-                    History history = new History(name, rawData, new Date());
+                    History history = new History(rawData, new Date());
                     viewModel.insert(history);
 
                     Intent intent = new Intent(getBaseContext(), HistoryActivity.class);

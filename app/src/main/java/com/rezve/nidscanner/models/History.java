@@ -15,20 +15,17 @@ import java.util.Date;
 public class History implements Parcelable{
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private String name;
     private String details;
     @TypeConverters( DateConverter.class )
     private Date createdAt;
 
-    public History(String name, String details, Date createdAt) {
-        this.name = name;
+    public History(String details, Date createdAt) {
         this.details = details;
         this.createdAt = createdAt;
     }
 
     public History(Parcel in) {
         this.id = in.readInt();
-        this.name = in.readString();
         this.details = in.readString();
         this.createdAt = new Date(in.readLong());
     }
@@ -39,10 +36,6 @@ public class History implements Parcelable{
 
     public int getId() {
         return id;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public String getDetails() {
@@ -61,7 +54,6 @@ public class History implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
-        dest.writeString(this.name);
         dest.writeString(this.details);
         dest.writeLong(this.createdAt.getTime());
     }
